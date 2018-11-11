@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+      <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="Adam Kott" content="">
+
+    <title>Adam Kott</title>
+
+    <!-- Bootstrap core CSS -->
+	<link rel="icon" href=https://webp.svsu.edu/~ackott/images/ackott2018.jpg type="image/png">
+        <link href="https://webp.svsu.edu/~ackott/images/bare/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+		label {
+			width: 120px;
+			text-align: center;
+			padding-right: 2px;
+			display: inline-block;
+		}
+		input[type="number"] {
+			width:50px;
+			margin-right: 5px;
+		}
+    input[type="text"] {
+			width:50px;
+			margin-right: 5px;
+		}
+		</style>
+
+  </head>
+
+ <body onload="addForm()">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">ackott(Adam Kott)</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="https://ackott.github.io/pages/#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About The Creator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://csis.svsu.edu/~ackott/">CSIS Server</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	</head>
+  
+    <!-- Page Content -->
+    <div class="container">
+		<h1>Add new input lines to HTML entry form</h1>
+		
+		<p>Enable users to add a row of fields to an HTML input form. In this code, after the HTML loads, addForm() is called. Clicking the Add Line button calls a function, addLine(), which calls addField() once for each field in the new input line. The elements, label and input, are formatted using CSS. </p>
+		
+		<button type="button" onclick="addLine();">Add Line</button>
+		<br />
+		<br />
+		
+		<div id="div1">
+		</div>
+		
+		<h1>Generate array of objects</h1>
+		
+		<p>Loop through the HTML form lines and store the data into an array of objects, where each property of an object contains the data in the input field of the HTML entry form. </p>
+		
+		<button type="button" onclick="genObjectArray();">Generate and Display Array of Objects</button>
+		<br />
+		
+		<div id="div2">
+		</div>
+		
+		<h1>Display table containing data from array of objects</h1>
+		
+		<p>Loop through the HTML form lines and store the data into an array of objects, where each property of an object contains the data in the input field of the HTML entry form. </p>
+		
+		<button type="button" onclick="">Generate and Display Table</button>
+    
+		<br />
+		<br />
+		
+		<div id="div3">
+		</div>
+    
+		
+		<!-- The table, below, shows examples of data. Do not include any HTML-coded table in your code. Instead, use JavaScript to append a table to the div, above. -->
+    <table class="table table-striped", border = "1">
+		  <tr>
+			<th>Local Name</th>
+			<th>Local DOB</th>
+			<th>Local Age</th>
+			<th>Local Zodiac</th>
+		  </tr>
+		  <tr>
+			<td>Deng Xiaoping</td>
+			<td>1904-08-22</td>
+			<td>115</td>
+			<td>Dragon</td>
+		  </tr>
+		  <tr>
+			<td>Dwight Eisenhower</td>
+			<td>10-14-1890</td>
+			<td>128</td>
+			<td>Libra</td>
+		  </tr>
+
+		</table>
+
+		<script>
+		
+// GLOBAL VARIABLES
+
+var currentLine = 0;
+var inputWidth  = 10;
+var objArray    = [];
+
+// FUNCTIONS
+
+/* addForm()
+ * appends an entry form to an HTML element with id="div1"
+ */
+function addForm() {
+	// precondition: HTML must contain <div id="div1"> element
+
+	// create a new form element, and append to div1
+	var newelement = document.createElement("form");
+	newelement.setAttribute("id","form1");
+	var div1 = document.getElementById("div1");
+	div1.appendChild(newelement);
+
+	// create a new fieldset element, and append to form1
+	var newelement = document.createElement("fieldset");
+	newelement.setAttribute("id","fieldset1");
+	var form1 = document.getElementById("form1");
+	form1.appendChild(newelement);
+
+	// create a new legend element, and append to fieldset1
+	var newelement = document.createElement("legend");
+	var textnode = document.createTextNode("People ");
+	newelement.appendChild(textnode);
+	var fieldset1 = document.getElementById("fieldset1");
+	fieldset1.appendChild(newelement);
+
+	// create a new label element, and append to fieldset1
+	var newelement = document.createElement("label");
+	newelement.setAttribute("for","fname"+currentLine);
+	var textnode = document.createTextNode("Birth Name");
+	newelement.appendChild(textnode);
+	var fieldset1 = document.getElementById("fieldset1");
+	fieldset1.appendChild(newelement);
+	// create a new input element, and append to fieldset1
+	var newelement = document.createElement("input");
+	newelement.setAttribute("name","fname"+currentLine);
+	newelement.setAttribute("id","fname"+currentLine);
+	newelement.setAttribute("type","text");
+	newelement.setAttribute("placeholder","Adam");
+	newelement.setAttribute("size",8);
+	if (currentLine==0) newelement.setAttribute("autofocus","autofocus");
+	var fieldset1 = document.getElementById("fieldset1");
+	fieldset1.appendChild(newelement);
+
+	// add more fields 
+	addField("fieldset1", "lname", "Surname", "text", "Kott", inputWidth);
+	addField("fieldset1", "month", "Solar Birth Month", "number", "MM",inputWidth);
+  addField("fieldset1", "day", "Solar Birth Day", "number", "DD", inputWidth);
+  addField("fieldset1", "year", "Solar Birth Year", "number", "YYYY", inputWidth);
+	addCountry("fieldset1", "country", "Country", "USA", "China");
+
+
+	// add line break 
+	var newelement = document.createElement("br");
+	var fieldset1 = document.getElementById("fieldset1");
+	fieldset1.appendChild(newelement);
+
+	// increment line counter
+	currentLine++;
+}
+
+/* addLine()
+ * inserts all labels and input elements for one row of a form
+ */
+function addLine () {
+	// precondition: inputWidth global variable must be set
+	// precondition: call from addForm() so HTML element with id="fieldset1" exists
+	
+  addField("fieldset1","fname", "Birth Name", "text", "Adam", inputWidth);
+  addField("fieldset1", "lname", "Surname", "text", "Kott", inputWidth);
+	addField("fieldset1", "month", "Solar Birth Month", "number", "MM",inputWidth);
+  addField("fieldset1", "day", "Solar Birth Day", "number", "DD", inputWidth);
+  addField("fieldset1", "year", "Solar Birth Year", "number", "YYYY", inputWidth);
+	addCountry("fieldset1", "country", "Country", "USA", "China");
+  
+	var newelement = document.createElement("br");
+	var fieldset1 = document.getElementById("fieldset1");
+	fieldset1.appendChild(newelement);
+	currentLine++;
+}
+/* addField()
+ * inserts one label one input element into a row of a form 
+ */
+function addField(formId, namePrefix, labelText, dataType, placeholder, fieldSize) {
+	// precondition: currentLine (global variable) must be set
+	// precondition: objArray[] (global variable) must be declared
+	// precondition: call from addLine() so HTML element with id=formID exists
+
+	// create a new label element, and append to form (or fieldset)
+	var n = document.createElement("label");
+	n.setAttribute("for",namePrefix+currentLine);
+	var t = document.createTextNode(labelText + " " );
+	n.appendChild(t);
+	var f = document.getElementById(formId);
+	f.appendChild(n);
+	// create a new input element, and append to form
+	var n = document.createElement("input");
+	n.setAttribute("name",namePrefix+currentLine);
+	n.setAttribute("id",namePrefix+currentLine);
+	n.setAttribute("type",dataType);
+	n.setAttribute("placeholder",placeholder);
+	n.setAttribute("size",fieldSize);
+	var f = document.getElementById(formId);
+	f.appendChild(n);
+  
+}
+      function addCountry(formid, name, label, option1, option2){
+				//label for select element is added to form
+				var l=document.createElement("label");
+				l.setAttribute("for", name+currentLine);
+				l.appendChild(document.createTextNode(label));
+				f = document.getElementById(formid);
+				f.appendChild(l);
+				
+				//select element is created
+				var s=document.createElement("select");
+				s.setAttribute("id", name+currentLine);
+				var o = document.createElement("option");
+				o.setAttribute("value", option1);
+				//first option added to select element
+				o.appendChild(document.createTextNode(option1));
+				s.appendChild(o);
+				var o2 = document.createElement("option");
+				o2.setAttribute("value", option2);
+				//second option added to select element
+				o2.appendChild(document.createTextNode(option2));
+				s.appendChild(o2);
+				//select element is added to form
+				document.getElementById(formid).appendChild(s);
+				space=document.createTextNode(" ");
+				document.getElementById(formid).appendChild(space);
+			}
+			
+
+/* genObjectArray()
+ * generates content for an array of objects, 
+ * where each element of the array 
+ * is an object containing the data entered in one line of the form 
+ */
+function genObjectArray() {
+	// precondition: HTML must contain <div id="div2"> element
+	// precondition: currentLine (global variable) must be set
+
+	// generate objArray from HTML form elements
+	for(i = 0; i < currentLine; i++) {
+		objArray[i] = {
+			'fname'     :document.getElementById("fname"+i).value,
+			'lname'     :document.getElementById("lname"+i).value,
+      'month'       :parseInt(document.getElementById("month"+i).value)?parseInt(document.getElementById("month"+i).value):0, 
+			'day'       :parseInt(document.getElementById("day"+i).value)?parseInt(document.getElementById("day"+i).value):0, 
+      'year'       :parseInt(document.getElementById("year"+i).value)?parseInt(document.getElementById("year"+i).value):0, 
+			'country'   :document.getElementById("country"+i).value,
+			'countryAge':function () {
+				if('China'==this.country)
+					return parseInt(this.age)+1; 
+				else 
+					return parseInt(this.age);
+				}
+		};
+	}
+
+	// display objArray
+	var divContent = "<ol start='0'>";
+	objArray.forEach(function(e) {
+		divContent += '<li>';
+		divContent += JSON.stringify(e);
+		divContent += ' ... countryAge() == ' + e.countryAge();
+		divContent += '</li>';
+	});
+	divContent += "</ol>";
+	document.getElementById("div2").innerHTML = divContent;
+}
+function genTable(){
+  
+  
+  
+}
+/* genTable()
+ * generates an HTML table containing localized output from 
+ */
+
+			</script>
+     </div>
+		</body>
+
+	</html>
+
